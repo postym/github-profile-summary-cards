@@ -21,3 +21,8 @@ jobs:
           BRANCH_NAME: "main"  # Change if your default branch is different
           UTC_OFFSET: 0  # Adjust if needed
           AUTO_PUSH: true  # Automatically push the generated cards
+
+      - name: Check output directory
+        run: |
+          echo "Checking profile-summary-card-output directory..."
+          ls -la ./profile-summary-card-output
