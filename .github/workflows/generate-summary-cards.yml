@@ -20,9 +20,22 @@ jobs:
           USERNAME: ${{ github.repository_owner }}  # Your GitHub username
           BRANCH_NAME: "main"  # Change if your default branch is different
           UTC_OFFSET: 0  # Adjust if needed
-          AUTO_PUSH: true  # Automatically push the generated cards
+          AUTO_PUSH: false  # Set to false to handle commits manually
 
       - name: Check output directory
         run: |
           echo "Checking profile-summary-card-output directory..."
-          ls -la ./profile-summary-card-output
+          if [ -d "./profile-summary-card-output" ] && [ "$(ls -A ./profile-summary-card-output)" ]; then
+            echo "Directory exists and is not empty."
+          else
+            echo "Directory does not exist or is empty."
+            exit 1  # Fail the job if the directory is empty
+          fi
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add ./profile-summary-card-output
+          git commit -m "Update profile summary cards"
+          git push origin main  # Change if your default branch is different
