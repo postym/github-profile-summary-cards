@@ -25,6 +25,7 @@
         "childprocess": "^2.0.2",
         "d3": "^6.7.0",
         "dotenv": "^8.2.0",
+        "github-profile-summary-cards": "file:",
         "jest-junit": "^14.0.0",
         "js-abbreviation-number": "^1.4.0",
         "jsdom": "^16.4.0",
