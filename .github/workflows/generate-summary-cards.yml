@@ -1,0 +1,23 @@
+name: Generate GitHub Profile Summary Cards
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Runs daily at midnight UTC
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Generate Summary Cards
+        uses: vn7n24fzkq/github-profile-summary-cards@release
+        env:
+          GITHUB_TOKEN: ${{ secrets.SUMMARY_GITHUB_TOKEN }}  # Use your personal access token
+        with:
+          USERNAME: ${{ github.repository_owner }}  # Your GitHub username
+          BRANCH_NAME: "main"  # Change if your default branch is different
+          UTC_OFFSET: 0  # Adjust if needed
+          AUTO_PUSH: true  # Automatically push the generated cards
